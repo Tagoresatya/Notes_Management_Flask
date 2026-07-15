@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Contact Us</h1>
+        <p class="text-muted">
+            We'd love to hear from you. Get in touch with us anytime.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <!-- Email Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100 text-center p-4">
+                <div class="fs-1 mb-3">📧</div>
+                <h4>Email Support</h4>
+                <p class="text-muted">
+                    tagoresatya2022@gmail.com
+                </p>
+            </div>
+        </div>
+
+        <!-- Phone Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100 text-center p-4">
+                <div class="fs-1 mb-3">📞</div>
+                <h4>Call Us</h4>
+                <p class="text-muted">
+                    +91 8978365281
+                </p>
+            </div>
+        </div>
+
+        <!-- Location Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100 text-center p-4">
+                <div class="fs-1 mb-3">📍</div>
+                <h4>Location</h4>
+                <p class="text-muted">
+                    Hyderabad, India
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div class="card shadow border-0 mt-5">
+        <div class="card-body p-5">
+            <h3 class="mb-4 text-center">Send Us a Message</h3>
+
+            <form method="POST" action="{{ url_for('contact') }}">
+                <div class="mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                </div>
+
+                <div class="mb-3">
+                    <textarea name="message" class="form-control" rows="5" placeholder="Your Message"
+                        required></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger px-5">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
