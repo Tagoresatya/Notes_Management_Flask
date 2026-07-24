@@ -7,6 +7,7 @@ from flask_mail import Mail,Message
 import mysql.connector
 from itsdangerous import URLSafeTimedSerializer
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 
 
@@ -31,18 +32,32 @@ serializer = URLSafeTimedSerializer(app.secret_key)
 # --------------------
 # Database Connection Helper
 # --------------------
+# def get_db_connection():
+    # """
+    # Create and return a new MySQL connection.
+    # Edit host/user/password/database if yours are different.
+    # """
+    # conn = mysql.connector.connect(
+    #     host="localhost",
+        # user="root",       # change if your MySQL username is different
+        # password="Satya@#1014",       # enter MySQL password if you have one
+        # database="Notes_Management" # the DB created from the SQL script above
+    # )
+    # return conn
+
+
 def get_db_connection():
-    """
-    Create and return a new MySQL connection.
-    Edit host/user/password/database if yours are different.
-    """
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",       # change if your MySQL username is different
-        password="Satya@#1014",       # enter MySQL password if you have one
-        database="Notes_Management" # the DB created from the SQL script above
+        host=os.getenv("MYSQLHOST", "localhost"),
+        user=os.getenv("MYSQLUSER", "root"),
+        password=os.getenv("MYSQLPASSWORD", "Satya@#1014"),
+        database=os.getenv("MYSQLDATABASE", "Notes_Management"),
+        port=int(os.getenv("MYSQLPORT", 3306))
     )
     return conn
+
+
+
 
 # --------------------
 # Home (redirect)
