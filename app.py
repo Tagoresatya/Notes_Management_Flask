@@ -161,18 +161,12 @@ Click the link below to reset your password:
 This link expires in 10 minutes.
 """
 
-            mail.send(msg)
-
-            flash(
-                'Password reset link sent to your email.',
-                'success'
-            )
-
-        else:
-            flash(
-                'Email not found.',
-                'danger'
-            )
+            try:
+                mail.send(msg)
+                flash("Mail sent successfully!", "success")
+            except Exception as e:
+                print("MAIL ERROR:", e)
+                flash(str(e), "danger")
 
     return render_template('forgotpassword.html')
 
