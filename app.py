@@ -3,9 +3,8 @@
 # Comments below explain every step for a beginner.
 
 from flask import Flask, render_template, request, redirect, session, flash, url_for
-from flask_mail import Mail,Message
 import mysql.connector
-from itsdangerous import URLSafeTimedSerializer
+
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
@@ -115,103 +114,6 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/forgotpassword', methods=['GET', 'POST'])
-def forgotpassword():
-
-    if request.method == 'POST':
-
-        email = request.form['email']
-
-        conn = get_db_connection()
-        cur = conn.cursor(dictionary=True)
-
-        cur.execute(
-            "SELECT * FROM users WHERE email=%s",
-            (email,)
-        )
-
-        user = cur.fetchone()
-
-        cur.close()
-        conn.close()
-
-        if user:
-
-            token = serializer.dumps(
-                email,
-                salt='password-reset'
-            )
-
-            reset_link = url_for(
-                'reset_password',
-                token=token,
-                _external=True
-            )
-
-            msg = Message(
-                'Password Reset Request',
-                recipients=[email]
-            )
-
-            msg.body = f"""
-Click the link below to reset your password:
-
-{reset_link}
-
-This link expires in 10 minutes.
-"""
-
-            try:
-                mail.send(msg)
-                flash("Mail sent successfully!", "success")
-            except Exception as e:
-                print("MAIL ERROR:", e)
-                flash(str(e), "danger")
-
-    return render_template('forgotpassword.html')
-
-
-@app.route('/reset-password/<token>', methods=['GET', 'POST'])
-def reset_password(token):
-
-    try:
-        email = serializer.loads(
-            token,
-            salt='password-reset',
-            max_age=600
-        )
-
-    except:
-        flash('Reset link expired.', 'danger')
-        return redirect('/forgotpassword')
-
-    if request.method == 'POST':
-
-        password = request.form['password']
-
-        hashed_pw = generate_password_hash(password)
-
-        conn = get_db_connection()
-        cur = conn.cursor()
-
-        cur.execute(
-            "UPDATE users SET password=%s WHERE email=%s",
-            (hashed_pw, email)
-        )
-
-        conn.commit()
-
-        cur.close()
-        conn.close()
-
-        flash(
-            'Password updated successfully.',
-            'success'
-        )
-
-        return redirect('/login')
-
-    return render_template('resetpassword.html')
 
 # --------------------
 # Login Route
