@@ -2,12 +2,15 @@
 # Complete Flask app with registration, login, and private notes (CRUD).
 # Comments below explain every step for a beginner.
 
-from flask import Flask, app, render_template, request, redirect, session, flash, url_for
+from flask import Flask, render_template, request, redirect, session, flash, url_for
 import mysql.connector
 
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
+
+app = Flask(__name__)
+app.secret_key = "myverysecretkey"
 
 
 
