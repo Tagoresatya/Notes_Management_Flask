@@ -2,7 +2,7 @@
 # Complete Flask app with registration, login, and private notes (CRUD).
 # Comments below explain every step for a beginner.
 
-from flask import Flask, render_template, request, redirect, session, flash, url_for
+from flask import Flask, app, render_template, request, redirect, session, flash, url_for
 import mysql.connector
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -319,32 +319,8 @@ def about():
 
 # ---------------- CONTACT ----------------
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact')
 def contact():
-
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
-
-        msg = Message(
-            subject=f'Contact Form Message from {name}',
-            recipients=['tagoresatya2022@gmail.com']
-        )
-
-        msg.body = f"""
-Name: {name}
-Email: {email}
-
-Message:
-{message}
-"""
-
-        mail.send(msg)
-
-        flash("Message sent successfully!", "success")
-        return redirect('/contact')
-
     return render_template('contact.html')
 
 # --------------------
