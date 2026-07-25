@@ -67,3 +67,129 @@ footer strong {
     background-color: darkred;
     color: white;
 }
+
+
+/* ===========================
+   Modern Portfolio Navbar
+=========================== */
+
+.custom-navbar{
+    background:rgba(37,99,235,.95);
+    backdrop-filter:blur(12px);
+    padding:14px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.navbar-brand{
+    color:#000000 !important;
+    font-size:1.7rem;
+    font-weight:700;
+    
+}
+
+.navbar-nav{
+    gap:12px;
+}
+
+
+.nav-pill{
+    color:#000000 !important;
+    padding:10px 22px !important;
+    border-radius:999px;
+    border:2px solid rgba(255,255,255,.22);
+    font-weight:600;
+    transition:.35s;
+}
+
+.nav-pill:hover{
+
+    background:#fff;
+
+    color:#2563eb !important;
+
+    border-color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 22px rgba(0,0,0,.18);
+
+}
+
+.username-pill{
+
+    background:rgba(255,255,255,.12);
+
+    color:#fff;
+
+    padding:10px 22px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+}
+
+.logout-pill{
+
+    background:#d65757;
+
+    border:none;
+
+}
+
+.logout-pill:hover{
+
+    background:#d65757 !important;
+
+    color:#fff !important;
+
+}
+
+/* Mobile */
+
+@media (max-width:991px){
+
+    .navbar-collapse{
+
+        position:absolute;
+
+        top:75px;
+
+        right:15px;
+
+        width:220px;
+
+        background:#2563eb;
+
+        border-radius:18px;
+
+        padding:18px;
+
+        box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+        z-index:1000;
+
+    }
+
+    .navbar-nav{
+
+        align-items:stretch;
+
+        gap:12px;
+
+    }
+
+    .nav-pill,
+    .username-pill{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+}
+
+main.container{
+    padding-top: 30px;
+}
